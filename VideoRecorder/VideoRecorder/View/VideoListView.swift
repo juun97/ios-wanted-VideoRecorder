@@ -13,7 +13,7 @@ final class VideoListView: UIViewController {
     
     // MARK: - Properties
     
-    private var dataSource: DataSource!
+    private lazy var dataSource: DataSource = configureDataSource()
     
     private let tableView: UITableView = {
        let tableView = UITableView()
@@ -26,11 +26,15 @@ final class VideoListView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        configureUI()
+        configureLayout()
+        configureNavigationBar()
+        configureTableView()
     }
     
 
-    private func addSubviews() {
+    private func configureUI() {
+        view.backgroundColor = .white
         view.addSubview(tableView)
     }
     
@@ -44,18 +48,35 @@ final class VideoListView: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor)
         ])
     }
-
-}
-
-extension VideoListView: UITableViewDelegate {
-    enum Section: CaseIterable {
-        case main
+    
+    private func configureNavigationBar() {
+        let buttonItem: UIBarButtonItem = {
+            let button = UIButton()
+            button.setImage(UIImage(systemName: "video.badge.plus"), for: .normal)
+            button.addTarget(self,
+                             action: #selector(presentAddingDiaryPage),
+                             for: .touchUpInside)
+            let barButton = UIBarButtonItem(customView: button)
+            
+            return barButton
+        }()
+        
+        navigationItem.rightBarButtonItem = buttonItem
     }
     
-    private func configureDataSource() {
-        tableView.register(VideoListCell.self, forCellReuseIdentifier: VideoListCell.identifier)
+    @objc private func presentAddingDiaryPage() {
         
-        dataSource = DataSource(tableView: tableView, cellProvider: { tableView, indexPath, video in
+        
+        //navigationController?.pushViewController(diaryDetailViewController, animated: true)
+    }
+    
+    private func configureTableView() {
+        tableView.delegate = self
+        tableView.register(VideoListCell.self, forCellReuseIdentifier: VideoListCell.identifier)
+    }
+    
+    private func configureDataSource() -> DataSource {
+        let dataSource = DataSource(tableView: tableView, cellProvider: { tableView, indexPath, video in
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: VideoListCell.identifier,
                 for: indexPath
@@ -63,6 +84,8 @@ extension VideoListView: UITableViewDelegate {
 
             return cell
         })
+        
+        return dataSource
     }
     
     private func applySnapshot() {
@@ -73,5 +96,14 @@ extension VideoListView: UITableViewDelegate {
         
         dataSource.apply(snapshot, animatingDifferences: true)
     }
+
+}
+
+extension VideoListView: UITableViewDelegate {
+    enum Section: String, Hashable {
+        case main = "Video List"
+    }
+    
+
     
 }
