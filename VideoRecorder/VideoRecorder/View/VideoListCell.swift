@@ -66,10 +66,10 @@ final class VideoListCell: UITableViewCell {
     
     private func configureLayout() {
         NSLayoutConstraint.activate([
-            mainStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            mainStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
-            mainStackView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
-            mainStackView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            mainStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
+            mainStackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -10)
         ])
     }
 }

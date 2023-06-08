@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0838B82B2A31BE5C0020A0D1 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0838B82A2A31BE5C0020A0D1 /* RecordView.swift */; };
+		0838B82D2A32287A0020A0D1 /* CaptureButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0838B82C2A32287A0020A0D1 /* CaptureButton.swift */; };
 		085AEB232A2E0DDE00F5D740 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AEB222A2E0DDE00F5D740 /* AppDelegate.swift */; };
 		085AEB252A2E0DDE00F5D740 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AEB242A2E0DDE00F5D740 /* SceneDelegate.swift */; };
 		085AEB272A2E0DDE00F5D740 /* VideoListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AEB262A2E0DDE00F5D740 /* VideoListView.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0838B82A2A31BE5C0020A0D1 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		0838B82C2A32287A0020A0D1 /* CaptureButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureButton.swift; sourceTree = "<group>"; };
 		085AEB1F2A2E0DDE00F5D740 /* VideoRecorder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoRecorder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		085AEB222A2E0DDE00F5D740 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		085AEB242A2E0DDE00F5D740 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 			children = (
 				085AEB262A2E0DDE00F5D740 /* VideoListView.swift */,
 				08DD0CCB2A2EFA76004A8D11 /* VideoListCell.swift */,
+				0838B82A2A31BE5C0020A0D1 /* RecordView.swift */,
+				0838B82C2A32287A0020A0D1 /* CaptureButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -186,8 +192,10 @@
 				085AEB272A2E0DDE00F5D740 /* VideoListView.swift in Sources */,
 				08DD0CCF2A2F06CB004A8D11 /* Video.swift in Sources */,
 				085AEB232A2E0DDE00F5D740 /* AppDelegate.swift in Sources */,
+				0838B82B2A31BE5C0020A0D1 /* RecordView.swift in Sources */,
 				085AEB252A2E0DDE00F5D740 /* SceneDelegate.swift in Sources */,
 				08DD0CCC2A2EFA76004A8D11 /* VideoListCell.swift in Sources */,
+				0838B82D2A32287A0020A0D1 /* CaptureButton.swift in Sources */,
 				08DD0CC92A2EF90B004A8D11 /* VidelListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +338,8 @@
 				DEVELOPMENT_TEAM = RA77GBK8U2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoRecorder/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to captrue photos and videos";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses the microphone to record videos with audio.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -359,6 +369,8 @@
 				DEVELOPMENT_TEAM = RA77GBK8U2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VideoRecorder/Resources/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses the camera to captrue photos and videos";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app uses the microphone to record videos with audio.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";

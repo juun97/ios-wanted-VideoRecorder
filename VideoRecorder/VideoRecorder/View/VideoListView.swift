@@ -13,7 +13,7 @@ final class VideoListView: UIViewController {
     
     // MARK: - Properties
     
-    private lazy var dataSource: DataSource = configureDataSource()
+    private lazy var dataSource: DataSource = createDataSource()
     
     private let tableView: UITableView = {
        let tableView = UITableView()
@@ -50,7 +50,34 @@ final class VideoListView: UIViewController {
     }
     
     private func configureNavigationBar() {
-        let buttonItem: UIBarButtonItem = {
+        let imageView: UIImageView = {
+            let image = UIImage(systemName: "list.triangle")?.withTintColor(.black)
+            
+            let imageView = UIImageView(image: image)
+            imageView.contentMode = .scaleAspectFit
+
+            return imageView
+        }()
+        
+        let titleLabel: UILabel = {
+            let label = UILabel()
+            label.text = "Video List"
+            label.font = .systemFont(ofSize: 24, weight: .heavy)
+            
+            return label
+        }()
+        
+        let leftBarItem: UIBarButtonItem = {
+            let stackView = UIStackView(arrangedSubviews: [imageView, titleLabel])
+            stackView.axis = .horizontal
+            stackView.spacing = 4
+            let barButton = UIBarButtonItem(customView: stackView)
+            
+            return barButton
+            
+        }()
+
+        let rightBarItem: UIBarButtonItem = {
             let button = UIButton()
             button.setImage(UIImage(systemName: "video.badge.plus"), for: .normal)
             button.addTarget(self,
@@ -61,21 +88,23 @@ final class VideoListView: UIViewController {
             return barButton
         }()
         
-        navigationItem.rightBarButtonItem = buttonItem
+        navigationItem.leftBarButtonItem = leftBarItem
+        navigationItem.rightBarButtonItem = rightBarItem
     }
     
     @objc private func presentAddingDiaryPage() {
         
         
-        //navigationController?.pushViewController(diaryDetailViewController, animated: true)
+        navigationController?.pushViewController(RecordView(), animated: true)
     }
+    
     
     private func configureTableView() {
         tableView.delegate = self
         tableView.register(VideoListCell.self, forCellReuseIdentifier: VideoListCell.identifier)
     }
     
-    private func configureDataSource() -> DataSource {
+    private func createDataSource() -> DataSource {
         let dataSource = DataSource(tableView: tableView, cellProvider: { tableView, indexPath, video in
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: VideoListCell.identifier,
@@ -86,6 +115,19 @@ final class VideoListView: UIViewController {
         })
         
         return dataSource
+    }
+    
+    private func configureDataSource() {
+        dataSource = DataSource(tableView: tableView, cellProvider: { tableView, indexPath, video in
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: VideoListCell.identifier,
+                for: indexPath
+            ) as? VideoListCell
+            
+            return cell
+        })
+        
+        
     }
     
     private func applySnapshot() {
@@ -100,10 +142,8 @@ final class VideoListView: UIViewController {
 }
 
 extension VideoListView: UITableViewDelegate {
-    enum Section: String, Hashable {
-        case main = "Video List"
+    enum Section: String {
+        case main
     }
-    
-
     
 }
