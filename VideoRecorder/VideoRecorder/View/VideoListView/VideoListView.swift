@@ -55,6 +55,7 @@ final class VideoListView: UIViewController {
             
             let imageView = UIImageView(image: image)
             imageView.contentMode = .scaleAspectFit
+            imageView.tintColor = .black
 
             return imageView
         }()
