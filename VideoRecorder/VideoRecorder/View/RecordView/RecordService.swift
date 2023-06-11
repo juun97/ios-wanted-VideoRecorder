@@ -5,7 +5,6 @@
 //  Created by 김성준 on 2023/06/09.
 //
 
-import Foundation
 import AVFoundation
 
 final class RecordService: NSObject {
@@ -113,9 +112,7 @@ final class RecordService: NSObject {
 
     func stopRecording() {
        if videoOutput.isRecording {
-         //self.stopTimer()
          videoOutput.stopRecording()
-         //recordPoint.layer.removeAllAnimations()
        }
      }
     
@@ -138,8 +135,7 @@ final class RecordService: NSObject {
         
         captureSession.beginConfiguration()
         defer { captureSession.commitConfiguration() }
-        
-        // Create new capture device
+
         var newDevice: AVCaptureDevice?
         if input.device.position == .back {
           newDevice = bestDevice(in: .front)
@@ -153,15 +149,13 @@ final class RecordService: NSObject {
           NSLog("\(error), \(error.localizedDescription)")
           return
         }
-        
-        // Swap capture device inputs
+
         captureSession.removeInput(input)
         captureSession.addInput(videoInput!)
       }
     
     
     func createPreView() -> AVCaptureVideoPreviewLayer? {
-        
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         
         return previewLayer
@@ -182,8 +176,24 @@ final class RecordService: NSObject {
 
 extension RecordService: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        
+        if (error != nil) {
+            print("Error recording movie: \(error!.localizedDescription)")
+        } else {
+            let videoRecorded = outputURL! as URL
+            let asset = AVAsset(url: videoRecorded)
+            let duration = asset.duration
+            let durationSeconds = CMTimeGetSeconds(duration)
+            
+            let date = DateManager.shared.today()
+            
+            let video = Video(
+                title: nil,
+                url: videoRecorded,
+                durationSeconds: durationSeconds,
+                date: date
+            )
+            
+         
+        }
     }
-    
-    
 }

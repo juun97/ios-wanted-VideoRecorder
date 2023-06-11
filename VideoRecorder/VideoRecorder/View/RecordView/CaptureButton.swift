@@ -44,5 +44,9 @@ class CaptureButton: UIButton {
               
           }
       }
+    
+    func toggle() {
+        isPlay.toggle()
+    }
 }
 

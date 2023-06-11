@@ -9,6 +9,8 @@ import Foundation
 
 struct Video: Codable, Hashable, Identifiable {
     var id = UUID()
-    let title: String
+    let title: String?
+    let url: URL
+    let durationSeconds: Float64
     let date: String
 }

@@ -47,6 +47,10 @@ final class RecordView: UIViewController {
     private let captureButton: CaptureButton = {
         let button = CaptureButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(RecordView.self,
+                         action: #selector(record),
+                         for: .touchUpInside)
+        
         
         return button
     }()
@@ -61,10 +65,17 @@ final class RecordView: UIViewController {
         button.addTarget(RecordView.self,
                          action: #selector(switchCamera),
                          for: .touchUpInside)
-        
+    
         return button
     }()
     
+    @objc private func record() {
+        if captureButton.isPlay {
+            recordService.stopRecording()
+        } else {
+            recordService.startRecording()
+        }
+    }
     
     @objc private func switchCamera() {
         recordService.swapCameraType()
